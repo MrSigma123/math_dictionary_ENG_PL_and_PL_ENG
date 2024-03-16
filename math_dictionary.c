@@ -107,7 +107,7 @@ void scan_the_input_term_eng(char *term, char *mode)
     
     printf("Please enter the term, which you want to translate: ");
     
-    scanf("%s", term);
+    fgets(term, 49, stdin);//scanf("%s", term);
     fflush(stdin);
 }
 
@@ -120,7 +120,7 @@ void scan_the_input_term_pl(char *term, char *mode)
     
     printf("Proszę wprowadź wyrażenie, które chcesz przetłumaczyć: ");
     
-    scanf("%s", term);
+    fgets(term, 49, stdin);//scanf("%s", term);
     fflush(stdin);
 }
 
@@ -142,16 +142,17 @@ void print_the_input_term_translation_and_description(char *term, char *mode, ch
         
         while (!(feof(fp)))
         {
-            fscanf(fp, "%s", read);
+            fgets(read, 49, fp);//fscanf(fp, "%s", read);
+            read[strlen(read)-1] = '\0';
             fflush(stdin);
             
             if (strcmp(term, read) == 0)
             {
                 printf("\n%s - ", term); // the coursor is set behind the translated term
-                fscanf(fp, "%s", read);  // scan the next word in the file
+                fgets(read, 49, fp);//fscanf(fp, "%s", read);  // scan the next word in the file
                 fflush(stdin);
                 strcpy(translation, read);
-                printf("%s\n\n", translation);
+                puts(translation);//printf("%s\n\n", translation);
             }
         }
         fclose(fp);
